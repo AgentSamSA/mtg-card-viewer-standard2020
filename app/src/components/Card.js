@@ -1,11 +1,9 @@
 import { connect } from "react-redux";
 
-import { WEBSITE_URL } from "../constants";
-
 const Card = (props) => {
     return (
         <div>
-            <a href={`${WEBSITE_URL}/card/${props.set}/${props.card.collector_number}`} target="_blank" rel="noreferrer">
+            <a href={props.card.scryfall_uri} target="_blank" rel="noreferrer">
                 {props.card.image_uris ?
                     <img src={props.card.image_uris.small} alt={props.card.name} />
                     : <img src="" alt="insert card art" />
