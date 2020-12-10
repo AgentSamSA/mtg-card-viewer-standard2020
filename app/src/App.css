@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-flow: column;
+  margin: 5% 0;
+}
+
+.App h1 {
+  margin-bottom: 10%;
 }
 
 .container {
@@ -7,10 +14,24 @@
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
-  height: 80vh;
+
 }
 
 .container.colors {
   display: flex;
   align-items: flex-start;
+  height: 20vh;
+}
+
+.container.colors img {
+  width: 10%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
 }

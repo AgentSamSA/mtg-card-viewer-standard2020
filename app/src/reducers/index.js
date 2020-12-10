@@ -36,6 +36,7 @@ export const rootReducer = (state = initialState, action) => {
                 isFetching: false
             });
         case (SET_COLOR):
+            console.log(action.payload);
             return ({
                 ...state,
                 color: action.payload,
