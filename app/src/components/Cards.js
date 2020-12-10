@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 
 import Card from "./Card";
 
-import { getColor, getSetCards } from "../actions/index";
+import { setColor } from "../actions/index";
 
 import { COLOR_ARRAY } from "../constants";
 
 const Cards = (props) => {
-    useEffect((set) => {
-        getSetCards(set);
+    useEffect(() => {
     }, []);
 
     if (props.error) {
@@ -21,23 +20,18 @@ const Cards = (props) => {
     }
 
     const handleClick = (color) => {
-        getColor(color);
+        setColor(color);
     }
 
     return (
         <div className="container colors">
-            {COLOR_ARRAY.map(color => {
-                return (
-                    <button onClick={() => handleClick(color)}>{color}</button>
-                );
-            })}
+            {
+                COLOR_ARRAY.map(color =>
+                    <button onClick={() => handleClick(color)} key={color}>{color}</button>)
+            }
             <div>
                 {
-                    props.cards.map(card => {
-                        return (
-                            <Card card={card} key={card.id}/>
-                        )
-                    })
+                    props.cards.map(card => <Card card={card} key={card.id} />)
                 }
             </div>
         </div>
@@ -46,7 +40,6 @@ const Cards = (props) => {
 
 const mapStateToProps = state => {
     return {
-        set: state.set,
         cards: state.cards,
         color: state.color,
         isFetching: state.isFetching,
@@ -54,4 +47,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getColor, getSetCards })(Cards);
+export default connect(mapStateToProps, { setColor })(Cards);
