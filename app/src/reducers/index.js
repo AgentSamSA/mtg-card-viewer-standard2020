@@ -8,7 +8,7 @@ export const initialState = {
     error: ""
 }
 
-export const rootReducer = (state, action) => {
+export const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case (FETCH_START):
             return ({
