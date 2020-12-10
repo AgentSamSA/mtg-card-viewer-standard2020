@@ -1,39 +1,65 @@
 import { Link } from "react-router-dom";
 
-import styled from "styled-components";
+import { connect } from "react-redux";
 
-const Selector = () => {
+import styled from "styled-components";
+import { getSetCode } from "../actions/index";
+
+import { IMAGE_URL } from "../constants";
+
+const Selector = (props) => {
+
+    const handleClick = (set) => {
+        props.getSetCode(set);
+        console.log(set);
+    }
+
     return (
         <div className="container">
-            <StyledLink to="/sets/znr">
-                <img src="https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg?1607317200/" alt="Zendikar logo" />
+            <StyledLink to="/znr" onClick={() => handleClick("znr")}>
                 <p className="link">Zendikar Rising</p>
-                </StyledLink>
-            <StyledLink to="/sets/m21">
-                <img src="https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg?1607317200" alt="Core 2021 logo" />
-                    <p className="link">Core 2021</p>
-                </StyledLink>
-            <StyledLink to="/sets/iko">
-                <img src="https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg?1607317200" alt="Ikoria logo" />
-                    <p className="link">Ikoria: Lair of Behemoths</p>
-                </StyledLink>
-            <StyledLink to="/sets/thb">
-                <img src="https://c2.scryfall.com/file/scryfall-symbols/sets/thb.svg?1607317200" alt="Theros logo" />
-                    <p className="link">Theros Beyond Death</p>
-                </StyledLink>
-            <StyledLink to="/sets/eld">
-                <img src="https://c2.scryfall.com/file/scryfall-symbols/sets/eld.svg?1607317200" alt="Eldraine logo" />
-                    <p className="link">Throne of Eldraine</p>
-                </StyledLink>
+                <img src={IMAGE_URL + "znr.svg?1607317200/"} alt="Zendikar logo" />
+            </StyledLink>
+            <StyledLink to="/m21"  onClick={() => handleClick("m21")}>
+                <p className="link">Core 2021</p>
+                <img src={IMAGE_URL + "m21.svg?1607317200/"} alt="Core 2021 logo" />
+
+            </StyledLink>
+            <StyledLink to="/iko"  onClick={() => handleClick("iko")}>
+                <p className="link">Ikoria: Lair of Behemoths</p>
+                <img src={IMAGE_URL + "iko.svg?1607317200/"} alt="Ikoria logo" />
+
+            </StyledLink>
+            <StyledLink to="/thb"  onClick={() => handleClick("thb")}>
+                <p className="link">Theros Beyond Death</p>
+                <img src={IMAGE_URL + "thb.svg?1607317200/"} alt="Theros logo" />
+
+            </StyledLink>
+            <StyledLink to="/eld"  onClick={() => handleClick("eld")}>
+                <p className="link">Throne of Eldraine</p>
+                <img src={IMAGE_URL + "eld.svg?1607317200/"} alt="Eldraine logo" />
+
+            </StyledLink>
         </div>
     )
 }
 
-export default Selector;
+const mapStateToProps = state => {
+    return {
+        set: state.set,
+        cards: state.cards,
+        isFetching: state.isFetching,
+    }
+}
+
+export default connect(mapStateToProps, { getSetCode })(Selector);
 
 const StyledLink = styled(Link)`
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     color: black;
+    width: 15%;
     
     &:visited {
         text-decoration: none;
