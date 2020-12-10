@@ -13,7 +13,7 @@ import { rootReducer } from "./reducers/index";
 
 import reportWebVitals from './reportWebVitals';
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>
