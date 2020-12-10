@@ -5,22 +5,16 @@ export const FETCH_START = "FETCH_START";
 export const FETCH_SET = "FETCH_SET";
 export const FETCH_CARDS_FROM_SET = "FETCH_CARDS_FROM_SET";
 export const FETCH_COLOR = "FETCH_COLOR";
+export const FETCH_CARDS_BY_COLOR = "FETCH_CARDS_BY_COLOR";
 export const FETCH_FAIL = "FETCH_FAIL";
 
-export const getSet = (set) => dispatch => {
+export const getSetCode = (set) => dispatch => {
     dispatch({ type: FETCH_START });
 
-    axios
-        .get(BASE_URL + "sets/" + set)
-        .then(res => {
-            dispatch({ type: FETCH_SET, payload: res.data });
-        })
-        .catch(err => {
-            dispatch({ type: FETCH_FAIL, payload: err.response.message });
-        });
+    dispatch({ type: FETCH_SET, payload: set });
 }
 
-export const getCardsFromSet = (set) => dispatch => {
+export const getSetCards = (set) => dispatch => {
     dispatch({ type: FETCH_START });
 
     const allCards = [];
@@ -43,7 +37,11 @@ export const getCardsFromSet = (set) => dispatch => {
             dispatch({ type: FETCH_FAIL, payload: err.response.message })
         });
 
-        return allCards;
+    return allCards;
+}
+
+export const getColor = (color) => {
+    return ({ type: FETCH_COLOR, payload: color });
 }
 
 export const getCardsByColor = (set, color) => dispatch => {
