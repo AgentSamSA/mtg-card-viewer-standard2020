@@ -30,7 +30,7 @@ const Cards = (props) => {
     }
 
     return (
-        <>
+        <div className="container">
             <div className="container colors">
                 <img src={White} alt="White" onClick={() => handleClick("White", props.set)} key="White" />
                 <img src={Green} alt="Green" onClick={() => handleClick("Green", props.set)} key="Green" />
@@ -44,7 +44,7 @@ const Cards = (props) => {
                     props.cards.map(card => <Card card={card} key={card.id} />)
                 }
             </div>
-        </>
+        </div>
     )
 }
 
