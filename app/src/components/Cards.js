@@ -14,7 +14,7 @@ import C from "../assets/Colorless.png";
 
 const Cards = (props) => {
 
-    if (props.error) {
+    if (props.error || !props.cards) {
         return <h3>There was an error processing the request: {props.error}</h3>
     }
 
@@ -24,7 +24,10 @@ const Cards = (props) => {
 
     const handleClick = (color) => {
         props.getColor(color);
-        console.log(props.cards);
+    }
+
+    const clearColor = () => {
+        props.getColor("");
     }
 
     return (
@@ -37,10 +40,13 @@ const Cards = (props) => {
                 <img src={R} alt="Red" onClick={() => handleClick("R")} key="R" />
                 <img src={C} alt="Colorless" onClick={() => handleClick("C")} key="C" />
             </div>
-            <h2>{props.cards[0].set_name}</h2>
+            <div>
+                <h3 onClick={clearColor}>Back to All</h3>
+                <h2>{props.setName}</h2>
+            </div>
             <div className="container cards">
                 {
-                    props.cards.map(card => <Card card={card} key={card.id} />)
+                    props.sortedCards.map(card => <Card card={card} key={card.id} />)
                 }
             </div>
         </div>
@@ -50,8 +56,10 @@ const Cards = (props) => {
 const mapStateToProps = state => {
     return {
         set: state.set,
+        setName: state.setName,
         cards: state.cards,
         color: state.color,
+        sortedCards: state.sortedCards,
         isFetching: state.isFetching,
         error: state.error
     }
