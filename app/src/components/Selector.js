@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import styled from "styled-components";
-import { setSetCode, getSetCards } from "../actions/index";
+import { getSet } from "../actions/index";
 
 import { IMAGE_URL } from "../constants";
 
 const Selector = (props) => {
 
-    const handleClick = (setCode) => {
-        props.setSetCode(setCode);
-        props.getSetCards(setCode);
+    const handleClick = (set) => {
+        props.getSet(set);
     }
 
     return (
@@ -53,7 +52,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { setSetCode, getSetCards })(Selector);
+export default connect(mapStateToProps, { getSet })(Selector);
 
 const StyledLink = styled(Link)`
     display: flex;
@@ -61,8 +60,13 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: black;
     width: 15%;
+    transition: transform .2s;
     
     &:visited {
         text-decoration: none;
+    }
+
+    &:hover {
+        transform: scale(1.35);
     }
 `;

@@ -2,15 +2,24 @@ import { connect } from "react-redux";
 
 const Card = (props) => {
     return (
-        <div>
+        <>
             <a href={props.card.scryfall_uri} target="_blank" rel="noreferrer">
-                {props.card.image_uris ?
-                    <img src={props.card.image_uris.small} alt={props.card.name} />
-                    : <img src="" alt="insert card art" />
+                {props.card.card_faces ?
+                    props.card.card_faces.map(card_face => {
+                        return (
+                            <>
+                                <img src={card_face.image_uris.normal} alt={card_face.name} />
+                                <p>{card_face.name}</p>
+                            </>)
+                    })
+                    :
+                    <>
+                        <img src={props.card.image_uris.normal} alt={props.card.name} />
+                        <p>{props.card.name}</p>
+                    </>
                 }
-                <p>{props.card.name}</p>
             </a>
-        </div>
+        </>
     )
 }
 

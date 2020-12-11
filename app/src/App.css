@@ -5,7 +5,7 @@
 }
 
 .App h1 {
-  margin-bottom: 10%;
+  margin: 5% 0;
 }
 
 .container {
@@ -13,13 +13,12 @@
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
-
 }
 
 .container.colors {
   display: flex;
   align-items: flex-start;
-  height: 20vh;
+  height: 25vh;
 }
 
 .container.colors img {
@@ -27,7 +26,20 @@
 }
 
 .container.cards {
-  margin-top: 5%;
+  width: 100%;
+}
+
+.container.cards a {
+  width: 15%;
+}
+
+.container.cards img {
+  width: 80%;
+  transition: transform .2s;
+}
+
+.container.cards img:hover {
+  transform: scale(1.4);
 }
 
 a {

@@ -1,4 +1,4 @@
-import { FETCH_START, SET_SET_CODE, SET_COLOR, FETCH_FAIL, FETCH_CARDS_FROM_SET, FETCH_CARDS_BY_COLOR } from "../actions/index";
+import { FETCH_START, GET_SET, GET_COLOR, FETCH_FAIL, FETCH_CARDS_FROM_SET } from "../actions/index";
 
 export const initialState = {
     set: "",
@@ -21,7 +21,7 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 error: action.payload,
             });
-        case (SET_SET_CODE):
+        case (GET_SET):
             console.log(action.payload);
             return ({
                 ...state,
@@ -35,16 +35,14 @@ export const rootReducer = (state = initialState, action) => {
                 cards: action.payload,
                 isFetching: false
             });
-        case (SET_COLOR):
+        case (GET_COLOR):
             console.log(action.payload);
             return ({
                 ...state,
                 color: action.payload,
-                isFetching: false
-            });
-        case (FETCH_CARDS_BY_COLOR):
-            return ({
-                ...state, cards: action.payload,
+                cards: [state.cards.filter(card => {
+                    return card.colors.toString() === action.payload || card.color_identity.toString() === action.payload;
+                })],
                 isFetching: false
             });
         default:
