@@ -51,7 +51,7 @@ export const rootReducer = (state = initialState, action) => {
                 color: action.payload,
                 sortedCards: state.cards.filter(card => {
                     if (action.payload !== "C") {
-                    return card.colors.includes(action.payload) || card.color_identity.includes(action.payload);
+                        return card.colors.includes(action.payload) || card.color_identity.includes(action.payload);
                     } else if (action.payload) {
                         return card.colors.length === 0 || card.color_identity.length === 0;
                     } else {
