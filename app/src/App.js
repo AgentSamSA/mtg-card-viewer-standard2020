@@ -30,7 +30,8 @@ export default App;
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
-  margin-top: 5%;
+  margin: 3%;
+  font-size: 1.6rem;
 
   &:visited {
     text-decoration: none;

@@ -1,44 +1,43 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import Card from "./Card";
 
-import { getCardsByColor, setColor } from "../actions/index";
+import { getColor } from "../actions/index";
 
-import White from "../assets/White.png";
-import Green from "../assets/Green.png";
-import Blue from "../assets/Blue.png";
-import Black from "../assets/Black.png";
-import Red from "../assets/Red.png";
-import Colorless from "../assets/Colorless.png";
+import W from "../assets/White.png";
+import G from "../assets/Green.png";
+import U from "../assets/Blue.png";
+import B from "../assets/Black.png";
+import R from "../assets/Red.png";
+import C from "../assets/Colorless.png";
 
 const Cards = (props) => {
-    useEffect(() => {
-    }, []);
 
     if (props.error) {
-        return <h2>There was an error processing the request: {props.error}</h2>
+        return <h3>There was an error processing the request: {props.error}</h3>
     }
 
     if (props.isFetching) {
-        return <h2>Fetching info from Scryfall...</h2>
+        return <h3>Fetching info from Scryfall...</h3>
     }
 
-    const handleClick = (color, set) => {
-        setColor(color);
-        getCardsByColor(color, set);
+    const handleClick = (color) => {
+        props.getColor(color);
+        console.log(props.cards);
     }
 
     return (
         <div className="container">
             <div className="container colors">
-                <img src={White} alt="White" onClick={() => handleClick("White", props.set)} key="White" />
-                <img src={Green} alt="Green" onClick={() => handleClick("Green", props.set)} key="Green" />
-                <img src={Blue} alt="Blue" onClick={() => handleClick("Blue", props.set)} key="Blue" />
-                <img src={Black} alt="Black" onClick={() => handleClick("Black", props.set)} key="Black" />
-                <img src={Red} alt="Red" onClick={() => handleClick("Red", props.set)} key="Red" />
-                <img src={Colorless} alt="Colorless" onClick={() => handleClick("Colorless", props.set)} key="Colorless" />
+                <img src={W} alt="White" onClick={() => handleClick("W")} key="W" />
+                <img src={G} alt="Green" onClick={() => handleClick("G")} key="G" />
+                <img src={U} alt="Blue" onClick={() => handleClick("U")} key="U" />
+                <img src={B} alt="Black" onClick={() => handleClick("B")} key="B" />
+                <img src={R} alt="Red" onClick={() => handleClick("R")} key="R" />
+                <img src={C} alt="Colorless" onClick={() => handleClick("C")} key="C" />
             </div>
+            <h2>{props.cards[0].set_name}</h2>
             <div className="container cards">
                 {
                     props.cards.map(card => <Card card={card} key={card.id} />)
@@ -58,4 +57,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { setColor })(Cards);
+export default connect(mapStateToProps, { getColor })(Cards);

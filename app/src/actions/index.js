@@ -2,17 +2,14 @@ import axios from "axios";
 import { BASE_URL } from "../constants";
 
 export const FETCH_START = "FETCH_START";
-export const SET_SET_CODE = "SET_SET_CODE";
+export const GET_SET = "GET_SET";
 export const FETCH_CARDS_FROM_SET = "FETCH_CARDS_FROM_SET";
-export const SET_COLOR = "SET_COLOR";
-export const FETCH_CARDS_BY_COLOR = "FETCH_CARDS_BY_COLOR";
+export const GET_COLOR = "GET_COLOR";
 export const FETCH_FAIL = "FETCH_FAIL";
 
-export const setSetCode = (setCode) => {
-    return ({ type: SET_SET_CODE, payload: setCode });
-}
+export const getSet = (set) => dispatch => {
+    dispatch({ type: GET_SET, payload: set });
 
-export const getSetCards = (set) => dispatch => {
     dispatch({ type: FETCH_START });
 
     function handlePageData(data) {
@@ -37,19 +34,6 @@ export const getSetCards = (set) => dispatch => {
         });
 }
 
-export const setColor = (color) => {
-    return ({ type: SET_COLOR, payload: color });
-}
-
-export const getCardsByColor = (set, color) => dispatch => {
-    dispatch({ type: FETCH_START });
-
-    axios
-        .get(`${BASE_URL}/cards/search?&order=name&q=color%3D${color}+set%3A${set}`)
-        .then(res => {
-            dispatch({ type: FETCH_CARDS_BY_COLOR, payload: res.data.data });
-        })
-        .catch(err => {
-            dispatch({ type: FETCH_FAIL, payload: err });
-        });
+export const getColor = (color) => {
+    return({ type: GET_COLOR, payload: color });
 }
