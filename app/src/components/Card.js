@@ -7,16 +7,16 @@ const Card = (props) => {
                 {props.card.card_faces ?
                     props.card.card_faces.map(card_face => {
                         return (
-                            <>
+                            <div key={card_face.illustration_id}>
                                 <img src={card_face.image_uris.normal} alt={card_face.name} />
                                 <p>{card_face.name}</p>
-                            </>)
+                            </div>)
                     })
                     :
-                    <>
+                    <div>
                         <img src={props.card.image_uris.normal} alt={props.card.name} />
                         <p>{props.card.name}</p>
-                    </>
+                    </div>
                 }
             </a>
         </>
@@ -25,8 +25,8 @@ const Card = (props) => {
 
 const mapStateToProps = state => {
     return {
-        set: state.set,
-        cards: state.cards
+        cards: state.cards,
+        color: state.color
     }
 }
 

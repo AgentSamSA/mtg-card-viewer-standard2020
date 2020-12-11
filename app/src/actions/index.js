@@ -3,12 +3,15 @@ import { BASE_URL } from "../constants";
 
 export const FETCH_START = "FETCH_START";
 export const GET_SET = "GET_SET";
+export const GET_SET_NAME = "GET_SET_NAME";
 export const FETCH_CARDS_FROM_SET = "FETCH_CARDS_FROM_SET";
 export const GET_COLOR = "GET_COLOR";
 export const FETCH_FAIL = "FETCH_FAIL";
 
-export const getSet = (set) => dispatch => {
+export const getSet = (set, setName) => dispatch => {
     dispatch({ type: GET_SET, payload: set });
+
+    dispatch({ type: GET_SET_NAME, payload: setName });
 
     dispatch({ type: FETCH_START });
 
@@ -35,5 +38,5 @@ export const getSet = (set) => dispatch => {
 }
 
 export const getColor = (color) => {
-    return({ type: GET_COLOR, payload: color });
+    return ({ type: GET_COLOR, payload: color });
 }
